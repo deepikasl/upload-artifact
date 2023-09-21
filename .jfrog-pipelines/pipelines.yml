@@ -40,6 +40,7 @@ pipelines:
           integrations:
             - name: {{ .Values.artIntegration }}
             - name: {{ .Values.gitIntegration }}
+            - name: deepikaArtEnt
         execution:
           onExecute:
             - pushd $res_upload_artifact_gitrepo_1_resourcePath
