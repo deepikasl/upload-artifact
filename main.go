@@ -149,7 +149,7 @@ func (g *UploadArtifact) handleExecution(name string, options ...string) (string
 func (g *UploadArtifact) run() error {
   stepTempDir := os.Getenv("step_tmp_dir")
   // uploadArtifactPath := string
-  uploadArtifactPath := append(uploadArtifactPath, stepTempDir, "/ArtifactUpload")
+  uploadArtifactPath := stepTempDir + "/ArtifactUpload"
 	_, err := g.handleExecution("mkdir", "-p", uploadArtifactPath)
 	if err != nil {
 		return err
