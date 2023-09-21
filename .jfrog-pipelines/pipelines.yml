@@ -64,5 +64,5 @@ pipelines:
             - task: $TASK_NAME@v$TASK_VERSION
               input:
                 inputResource: "upload_artifact_gitrepo"
-                sourcePath: deepikajira
+                sourcePath: .*
                 targetPath: jfrog-pipelines
