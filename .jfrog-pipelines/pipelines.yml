@@ -63,6 +63,13 @@ pipelines:
       - name: test_published_upload_artifact_task
         type: Bash
         configuration:
+          runtime:
+            type: image
+            image:
+              auto:
+                language: go
+                versions:
+                  - "1.19"
           inputResources:
             - name: upload_artifact_gitrepo_1
               trigger: false
