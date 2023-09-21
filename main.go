@@ -175,69 +175,69 @@ func (g *UploadArtifact) run() error {
   var parameters=""
 
   if len(g.inputs.module) > 0 {
-    parameters = "--module" + g.inputs.module
+    parameters = "--module " + g.inputs.module + " "
   }
 
   var uploadProperties=""
   if len(g.inputs.properties) > 0 {
     uploadProperties = g.inputs.properties + ";"
   }
-  uploadProperties = append(uploadProperties, "pipelines_step_name=", os.Getenv("step_name"), ";")
-  uploadProperties = append(uploadProperties, "pipelines_run_number=", os.Getenv("run_number"), ";")
-  uploadProperties = append(uploadProperties, "pipelines_step_id=", os.Getenv("step_id"), ";")
-  uploadProperties = append(uploadProperties, "pipelines_pipeline_name=", os.Getenv("pipeline_name"), ";")
-  uploadProperties = append(uploadProperties, "pipelines_step_type=", os.Getenv("step_type"), ";")
-  uploadProperties = append(uploadProperties, "pipelines_step_platform=", os.Getenv("step_platform"), ";")
+  uploadProperties = uploadProperties + "pipelines_step_name=" + os.Getenv("step_name") + ";"
+  uploadProperties = uploadProperties + "pipelines_run_number=" + os.Getenv("run_number")+ ";"
+  uploadProperties = uploadProperties + "pipelines_step_id=" + os.Getenv("step_id")+ ";"
+  uploadProperties = uploadProperties + "pipelines_pipeline_name=" + os.Getenv("pipeline_name")+ ";"
+  uploadProperties = uploadProperties + "pipelines_step_type=" + os.Getenv("step_type")+ ";"
+  uploadProperties = uploadProperties + "pipelines_step_platform=" + os.Getenv("step_platform")+ ";"
 
-  parameters = append(parameters, "--props='", uploadProperties, "'")
+  parameters = parameters + "--props='" + uploadProperties + "'" + " "
 
   if len(g.inputs.deb) > 0 {
-    parameters = append(parameters, "--deb", g.inputs.deb)
+    parameters = parameters +  "--deb " + g.inputs.deb + " "
   }
 
   if len(g.inputs.flat) > 0 {
-    parameters = append(parameters, "--flat", g.inputs.flat)
+    parameters = parameters + "--flat " +  g.inputs.flat + " "
   }
 
   if len(g.inputs.recursive) > 0 {
-    parameters = append(parameters, "--recursive", g.inputs.recursive)
+    parameters = parameters + "--recursive" + g.inputs.recursive + " "
   }
 
   if len(g.inputs.regExp) > 0 {
-    parameters = append(parameters, "--regExp", g.inputs.regExp)
+    parameters = parameters + "--regExp" + g.inputs.regExp + " "
   }
 
   if len(g.inputs.dryRun) > 0 {
-    parameters = append(parameters, "--dry-run", g.inputs.dryRun)
+    parameters = parameters + "--dry-run" + g.inputs.dryRun + " "
   }
 
   if len(g.inputs.symlinks) > 0 {
-    parameters = append(parameters, "--symlinks", g.inputs.symlinks)
+    parameters = parameters + "--symlinks" + g.inputs.symlinks + " "
   }
 
   if len(g.inputs.explode) > 0 {
-    parameters = append(parameters, "--explode", g.inputs.explode)
+    parameters = parameters + "--explode" + g.inputs.explode + " "
   }
 
   if len(g.inputs.includeDirs) > 0 {
-    parameters = append(parameters, "--include-dirs", g.inputs.includeDirs)
+    parameters = parameters + "--include-dirs" + g.inputs.includeDirs + " "
   }
 
   if len(g.inputs.exclusions) > 0 {
-    parameters = append(parameters, "--exclusions", g.inputs.exclusions)
+    parameters = parameters + "--exclusions" + g.inputs.exclusions + " "
   }
 
   if len(g.inputs.syncDeletes) > 0 {
-    parameters = append(parameters, "--sync-deletes", g.inputs.syncDeletes)
+    parameters = parameters + "--sync-deletes" + g.inputs.syncDeletes + " "
   }
 
   var uploadCommand = ""
-  uploadCommand = append(uploadCommand, "\"", g.inputs.sourcePath, "\"")
-  uploadCommand = append(uploadCommand, "\"", g.inputs.targetPath, "\"")
-  uploadCommand = append(uploadCommand, parameters)
-  uploadCommand = append(uploadCommand, "--insecure-tls=", os.Getenv("no_verify_ssl"))
-  uploadCommand = append(uploadCommand, "--fail-no-op=true")
-  uploadCommand = append(uploadCommand, "--detailed-summary=true")
+  uploadCommand = uploadCommand + "\"" + g.inputs.sourcePath + "\"" + " "
+  uploadCommand = uploadCommand + "\"" +  g.inputs.targetPath + "\"" + " "
+  uploadCommand = uploadCommand + parameters
+  uploadCommand = uploadCommand + "--insecure-tls=" + os.Getenv("no_verify_ssl") + " "
+  uploadCommand = uploadCommand + "--fail-no-op=true" + " "
+  uploadCommand = uploadCommand + "--detailed-summary=true" + " "
 
   _, err = g.handleExecution("jf", "rt", "upload", uploadCommand...)
 	if err != nil {
