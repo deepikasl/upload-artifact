@@ -24,9 +24,12 @@ pipelines:
             autoPull: true
       environmentVariables:
         readOnly:
-          TASK_NAME: jfrog/upload_artifact
+          TASK_NAME: upload_artifact
           TASK_VERSION: 0.0.${run_number}
-          TASK_REPOSITORY: pipelines-tasks-local
+          TASK_REPOSITORY: pipelines-tasks-local/jfrog
+          RESOLVE_REPO: npm-virtual
+          JFROG_TASK_DEBUG: "true"
+          JFROG_CLI_LOG_LEVEL: debug
     steps:
       - name: build_and_publish_task
         type: Bash
@@ -39,6 +42,13 @@ pipelines:
         execution:
           onExecute:
             # Make sure version was provided
+            - test -n "$TASK_VERSION" -a "$TASK_VERSION" != "0.0.0"
+            - pushd $res_upload_artifact_gitrepo_1_resourcePath
+            # Make sure version was provided
+            - make build-all
+            # Configure JFrog CLI
+            - popd
+            # Run publish task
             - test -n "$TASK_VERSION" -a "$TASK_VERSION" != "0.0.0"
             - jf c show
             # Run publish task
@@ -63,7 +73,7 @@ pipelines:
         execution:
           onExecute:
             # Run task
-            - task: $TASK_NAME@v$TASK_VERSION
+            - task: jfrog/$TASK_NAME@v$TASK_VERSION
               rtIntegration: {{ .Values.artIntegration }}
               input:
                 inputResource: "upload_artifact_gitrepo_1"
