@@ -42,15 +42,17 @@ pipelines:
             - name: {{ .Values.gitIntegration }}
         execution:
           onExecute:
+            - pushd $res_upload_artifact_gitrepo_1_resourcePath
+            - export GOPROXY="https://${int_{{ .Values.artIntegration }}_user}:${int_{{ .Values.artIntegration }}_apikey}@entplus.jfrog.io/artifactory/api/go/pipe-go-tasks-virtual"
+            - export GONOSUMDB="github.com/jfrog/*"
+            - go get .
+            - make test
             # Make sure version was provided
             - test -n "$TASK_VERSION" -a "$TASK_VERSION" != "0.0.0"
-            - pushd $res_upload_artifact_gitrepo_1_resourcePath
-            # Make sure version was provided
             - make build-all
-            # Configure JFrog CLI
+            - ls -latr bin
             - popd
             # Run publish task
-            - test -n "$TASK_VERSION" -a "$TASK_VERSION" != "0.0.0"
             - jf c show
             # Run publish task
             - task: jfrog/publish-task@v0.1.0

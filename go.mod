@@ -1,9 +1,9 @@
-module upload-artifact
+module pipe-task-hello-world-go
 
 go 1.19
 
 require (
-	github.com/jfrog/jfrog-pipelines-tasks-sdk-go v0.0.5
+	github.com/jfrog/jfrog-pipelines-tasks-sdk-go v0.0.4
 	github.com/stretchr/testify v1.7.0
 )
 

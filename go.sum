@@ -5,8 +5,10 @@ github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWo
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
 github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
 github.com/google/go-cmp v0.5.9/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
-github.com/jfrog/jfrog-pipelines-tasks-sdk-go v0.0.5 h1:ezARvxlRlpB3hi8PNsgfEYYVmxdZGb6owajvUe2qo58=
-github.com/jfrog/jfrog-pipelines-tasks-sdk-go v0.0.5/go.mod h1:GJ35z5LOPaUs+z8ScYpUroz6czu64F/sm+7YdCqdekY=
+github.com/jfrog/jfrog-pipelines-tasks-sdk-go v0.0.3 h1:bz/rVNiVSlJQlr0lx2ILAwLHVepN64zsTXezaTSkpYQ=
+github.com/jfrog/jfrog-pipelines-tasks-sdk-go v0.0.3/go.mod h1:GJ35z5LOPaUs+z8ScYpUroz6czu64F/sm+7YdCqdekY=
+github.com/jfrog/jfrog-pipelines-tasks-sdk-go v0.0.4 h1:F82vc5ySCCNWl78DDhQ7mLapnRLJLM02HromYH80PBg=
+github.com/jfrog/jfrog-pipelines-tasks-sdk-go v0.0.4/go.mod h1:GJ35z5LOPaUs+z8ScYpUroz6czu64F/sm+7YdCqdekY=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=
 github.com/mattn/go-colorable v0.1.13/go.mod h1:7S9/ev0klgBDR4GtXTXX8a3vIGJpMovkB8vQcUbaXHg=
 github.com/mattn/go-isatty v0.0.16 h1:bq3VjFmv/sOjHtdEhmkEV4x1AJtvUvOJ2PFAZ5+peKQ=
