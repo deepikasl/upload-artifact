@@ -237,7 +237,7 @@ func (g *UploadArtifact) run() error {
   uploadCommand = uploadCommand + "--fail-no-op=true" + " "
   uploadCommand = uploadCommand + "--detailed-summary=true"
 
-  _, err = g.handleExecution("jf rt upload", uploadCommand)
+  _, err = g.handleExecution("jf", "rt", "upload", uploadCommand)
 	if err != nil {
 		return err
 	}
