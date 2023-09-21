@@ -153,10 +153,10 @@ func (g *UploadArtifact) run() error {
 	if err != nil {
 		return err
 	}
-	_, err = g.handleExecution("pushd", uploadArtifactPath)
-	if err != nil {
-    return err
-  }
+	// _, err = g.handleExecution("pushd", uploadArtifactPath)
+	// if err != nil {
+  //   return err
+  // }
   _, err = g.handleExecution("cp", "-r",  g.resourcePath)
 	if err != nil {
     return err
