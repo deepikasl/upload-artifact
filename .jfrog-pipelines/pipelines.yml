@@ -49,7 +49,7 @@ pipelines:
                 targetRepository: $TASK_REPOSITORY
                 taskName: $TASK_NAME
                 taskVersion: $TASK_VERSION
-                includePattern: ^README.md$|^dist
+                includePattern: ^README.md$|^bin
       - name: test_published_upload_artifact_task
         type: Bash
         configuration:
