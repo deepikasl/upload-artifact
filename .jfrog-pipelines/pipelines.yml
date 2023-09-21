@@ -2,7 +2,7 @@ template: true
 valuesFilePath: ./values.yml
 
 resources:
-  - name: upload_artifact_gitrepo
+  - name: upload_artifact_gitrepo_1
     type: GitRepo
     configuration:
       path: {{ .Values.repoPath }}
@@ -32,7 +32,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: upload_artifact_gitrepo
+            - name: upload_artifact_gitrepo_1
           integrations:
             - name: {{ .Values.artIntegration }}
         execution:
@@ -44,7 +44,7 @@ pipelines:
             - task: jfrog/publish-task@v0.1.0
               id: publish_docker_build
               input:
-                path: $res_upload_artifact_gitrepo_resourcePath
+                path: $res_upload_artifact_gitrepo_1_resourcePath
                 targetRepository: $TASK_REPOSITORY
                 taskName: $TASK_NAME
                 taskVersion: $TASK_VERSION
@@ -53,7 +53,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: upload_artifact_gitrepo
+            - name: upload_artifact_gitrepo_1
           inputSteps:
             - name: build_and_publish_task
           integrations:
@@ -61,8 +61,8 @@ pipelines:
         execution:
           onExecute:
             # Run task
-            - task: $TASK_NAME@v$TASK_VERSION
+            - task: $TASK_REPOSITORY/$TASK_NAME@v$TASK_VERSION
               input:
-                inputResource: "upload_artifact_gitrepo"
+                inputResource: "upload_artifact_gitrepo_1"
                 sourcePath: .*
                 targetPath: jfrog-pipelines
