@@ -152,7 +152,7 @@ func (g *UploadArtifact) run() error {
 	if err != nil {
 		return err
 	}
-	_, err = g.handleExecution("pushd", uploadArtifactPath)
+	_, err = g.handleExecution("cd", uploadArtifactPath)
 	if err != nil {
     return err
   }
