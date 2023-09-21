@@ -39,6 +39,7 @@ pipelines:
               trigger: false
           integrations:
             - name: {{ .Values.artIntegration }}
+            - name: {{ .Values.gitIntegration }}
         execution:
           onExecute:
             # Make sure version was provided
@@ -70,6 +71,7 @@ pipelines:
             - name: build_and_publish_task
           integrations:
             - name: {{ .Values.artIntegration }}
+            - name: {{ .Values.gitIntegration }}
         execution:
           onExecute:
             # Run task
