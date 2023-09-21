@@ -33,6 +33,7 @@ pipelines:
         configuration:
           inputResources:
             - name: upload_artifact_gitrepo_1
+              trigger: false
           integrations:
             - name: {{ .Values.artIntegration }}
         execution:
@@ -54,6 +55,7 @@ pipelines:
         configuration:
           inputResources:
             - name: upload_artifact_gitrepo_1
+              trigger: false
           inputSteps:
             - name: build_and_publish_task
           integrations:
