@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"path/filepath"
-	"strings"
 
 	"github.com/jfrog/jfrog-pipelines-tasks-sdk-go/tasks"
 )
@@ -237,12 +235,14 @@ func (g *UploadArtifact) run() error {
   uploadCommand = uploadCommand + parameters
   uploadCommand = uploadCommand + "--insecure-tls=" + os.Getenv("no_verify_ssl") + " "
   uploadCommand = uploadCommand + "--fail-no-op=true" + " "
-  uploadCommand = uploadCommand + "--detailed-summary=true" + " "
+  uploadCommand = uploadCommand + "--detailed-summary=true"
 
-  _, err = g.handleExecution("jf", "rt", "upload", uploadCommand...)
+  _, err = g.handleExecution("jf rt upload", uploadCommand)
 	if err != nil {
 		return err
 	}
+
+  stepName := tasks.GetStep().Name
 
   _, err = g.handleExecution("jf", "rt", "build-collect-env", g.runVariables[stepName+"_buildName"], g.runVariables[stepName+"_buildNumber"])
 	if err != nil {
@@ -254,8 +254,8 @@ func (g *UploadArtifact) run() error {
       g.inputs.failOnScan = "true"
     }
     scanCommand = ""
-    scanCommand = append(scanCommand, "--insecure-tls=", os.Getenv("no_verify_ssl"))
-    scanCommand = append(scanCommand, "--fail=", g.inputs.failOnScan)
+    scanCommand = scanCommand + "--insecure-tls=" + os.Getenv("no_verify_ssl") + " "
+    scanCommand = scanCommand + "--fail=", g.inputs.failOnScan + " "
     _, err = g.handleExecution("jf", "rt", "build-scan", scanCommand, g.runVariables[stepName+"_buildName"], g.runVariables[stepName+"_buildNumber"])
     if err != nil {
       return err
