@@ -43,4 +43,6 @@ input:
     description: If true, empty directories matching the criteria are uploaded.
   - name: syncDeletes
     description: A path under which to delete any existing files in Artifactory.
-   
+execution:
+  - bin/upload-artifact-${JFROG_OPERATING_SYSTEM_FAMILY}-${JFROG_ARCHITECTURE}
+  - export_run_variables
