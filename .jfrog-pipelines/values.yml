@@ -1,4 +1,4 @@
 repoPath: deepikasl/upload-artifact
 mainBranch: main
 gitIntegration: deepikaGithub
-artIntegration: deepikaArt
+artIntegration: deepikaArtlnp
