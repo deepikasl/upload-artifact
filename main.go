@@ -230,8 +230,8 @@ func (g *UploadArtifact) run() error {
   }
 
   var uploadCommand = ""
-  uploadCommand = uploadCommand + "\"" + g.inputs.sourcePath + "\"" + " "
-  uploadCommand = uploadCommand + "\"" +  g.inputs.targetPath + "\"" + " "
+  uploadCommand = uploadCommand + g.inputs.sourcePath + " "
+  uploadCommand = uploadCommand + g.inputs.targetPath + " "
   uploadCommand = uploadCommand + parameters
   uploadCommand = uploadCommand + "--insecure-tls=" + os.Getenv("no_verify_ssl") + " "
   uploadCommand = uploadCommand + "--fail-no-op=true" + " "
