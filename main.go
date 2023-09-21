@@ -156,10 +156,10 @@ func (g *UploadArtifact) run() error {
 	// if err != nil {
   //   return err
   // }
-  _, err = g.handleExecution("cp -r ",  g.resourcePath, ".")
-	if err != nil {
-    return err
-  }
+  // _, err = g.handleExecution("cp -r ",  g.resourcePath, ".")
+	// if err != nil {
+  //   return err
+  // }
   if len(g.inputs.sourcePath) == 0 {
     if g.inputs.regExp == "true" {
       g.inputs.sourcePath=".*"
