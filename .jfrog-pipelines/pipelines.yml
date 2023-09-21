@@ -41,7 +41,7 @@ pipelines:
             - test -n "$TASK_VERSION" -a "$TASK_VERSION" != "0.0.0"
             - jf c show
             # Run publish task
-            - task: publish-task@v0.1.0
+            - task: jfrog/publish-task@v0.1.0
               id: publish_docker_build
               input:
                 path: $res_upload_artifact_gitrepo_resourcePath
