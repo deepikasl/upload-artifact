@@ -147,17 +147,17 @@ func (g *UploadArtifact) handleExecution(name string, options ...string) (string
 }
 
 func (g *UploadArtifact) run() error {
-  stepTmpDir = os.Getenv("step_tmp_dir")
-  var uploadArtifactPath = append(stepTmpDir, "/ArtifactUpload")
+  stepTempDir := os.Getenv("step_tmp_dir")
+  var uploadArtifactPath = append(stepTempDir, "/ArtifactUpload")
 	_, err := g.handleExecution("mkdir", "-p", uploadArtifactPath)
 	if err != nil {
 		return err
 	}
-	_, err := g.handleExecution("pushd", uploadArtifactPath)
+	_, err = g.handleExecution("pushd", uploadArtifactPath)
 	if err != nil {
     return err
   }
-  _, err := g.handleExecution("cp", "-r",  g.resourcePath)
+  _, err = g.handleExecution("cp", "-r",  g.resourcePath)
 	if err != nil {
     return err
   }
@@ -239,7 +239,7 @@ func (g *UploadArtifact) run() error {
   uploadCommand = append(uploadCommand, "--fail-no-op=true")
   uploadCommand = append(uploadCommand, "--detailed-summary=true")
 
-  _, err := g.handleExecution("jf", "rt", "upload", uploadCommand...)
+  _, err = g.handleExecution("jf", "rt", "upload", uploadCommand...)
 	if err != nil {
 		return err
 	}
