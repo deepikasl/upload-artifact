@@ -187,7 +187,7 @@ func (g *UploadArtifact) run() error {
   uploadProperties = uploadProperties + "pipelines_step_type=" + os.Getenv("step_type")+ ";"
   uploadProperties = uploadProperties + "pipelines_step_platform=" + os.Getenv("step_platform")+ ";"
 
-  parameters = parameters + "--target-props='" + uploadProperties + "'" + " "
+  parameters = parameters + "--target-props=" + uploadProperties + " "
 
   if len(g.inputs.deb) > 0 {
     parameters = parameters +  "--deb " + g.inputs.deb + " "
