@@ -59,6 +59,7 @@ pipelines:
             # Run publish task
             - task: jfrog/publish-task@v0.1.0
               id: publish_docker_build
+              rtIntegration: {{ .Values.artIntegration }}
               input:
                 path: $res_upload_artifact_gitrepo_1_resourcePath
                 targetRepository: $TASK_REPOSITORY
