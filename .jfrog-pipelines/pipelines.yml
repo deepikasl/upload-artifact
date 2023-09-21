@@ -1,0 +1,68 @@
+template: true
+valuesFilePath: ./values.yml
+
+resources:
+  - name: upload_artifact_gitrepo
+    type: GitRepo
+    configuration:
+      path: {{ .Values.repoPath }}
+      gitProvider: {{ .Values.gitIntegration }}
+      branches:
+        include: ^{{ .Values.mainBranch }}$
+      cloneProtocol: https
+
+pipelines:
+  - name: upload_artifact_publish
+    configuration:
+      jfrogCliVersion: 2
+      runtime:
+        type: image
+        image:
+          custom:
+            name: releases-docker.jfrog.io/jfrog/pipelines-u18node
+            tag: "16"
+            autoPull: true
+      environmentVariables:
+        readOnly:
+          TASK_NAME: upload_artifact
+          TASK_VERSION: 0.0.${run_number}
+          TASK_REPOSITORY: pipelines-tasks-local
+    steps:
+      - name: build_and_publish_task
+        type: Bash
+        configuration:
+          inputResources:
+            - name: upload_artifact_gitrepo
+          integrations:
+            - name: {{ .Values.artIntegration }}
+        execution:
+          onExecute:
+            # Make sure version was provided
+            - test -n "$TASK_VERSION" -a "$TASK_VERSION" != "0.0.0"
+            - jf c show
+            # Run publish task
+            - task: publish-task@v0.1.0
+              id: publish_docker_build
+              input:
+                path: $res_upload_artifact_gitrepo_resourcePath
+                targetRepository: $TASK_REPOSITORY
+                taskName: $TASK_NAME
+                taskVersion: $TASK_VERSION
+                includePattern: ^README.md$|^dist
+      - name: test_published_upload_artifact_task
+        type: Bash
+        configuration:
+          inputResources:
+            - name: upload_artifact_gitrepo
+          inputSteps:
+            - name: build_and_publish_task
+          integrations:
+            - name: {{ .Values.artIntegration }}
+        execution:
+          onExecute:
+            # Run task
+            - task: $TASK_NAME@v$TASK_VERSION
+              input:
+                inputResource: "upload_artifact_gitrepo"
+                sourcePath: deepikajira
+                targetPath: jfrog-pipelines

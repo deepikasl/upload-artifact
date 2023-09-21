@@ -1,0 +1,4 @@
+repoPath: deepikasl/jenkins-comment
+mainBranch: main
+gitIntegration: deepikaGithub
+artIntegration: deepikaArt

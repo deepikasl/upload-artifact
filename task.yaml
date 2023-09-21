@@ -1,0 +1,46 @@
+name: upload-artifact
+description: upload-artifact task to upload files to Artifactory
+source: github.com/deepikasl/upload-artifact
+labels:
+  - upload-artifact
+  - artifactory
+input:
+  - name: inputResource
+    description: May specify a GitRepo, FileSpec, or RemoteFile resource containing the file(s) to be uploaded
+  - name: buildInfoResource
+    description: Must specify a BuildInfo resource if autoPublishBuildInfo is set as true
+  - name: autoPublishBuildInfo
+    description: If true, Build Info for the step will be published.
+  - name: forceXrayScan
+    description: If true, an Xray Scan will be triggered for the step.
+  - name: failOnScan
+    description: If a scan failure should cause a step failure, default true.
+  - name: sourcePath
+    description: Files to upload. Default *.
+  - name: targetPath
+    description: Where to upload the files, including repository name.
+  - name: properties
+    description: Semi-colon separated properties for the uploaded Artifact, e.g. "myFirstProperty=one;mySecondProperty=two". pipelines_step_name, pipelines_run_number, pipelines_step_id, pipelines_pipeline_name, pipelines_step_type, and pipelines_step_platform will also be added
+  - name: regExp
+    description: If true, sourcePath uses regular expressions instead of wildcards.
+  - name: flat
+    description: If true, the uploaded files are flattened removing the directory structure.
+  - name: module
+    description: A module name for the Build Info.
+  - name: deb
+    description: A distribution/component/architecture for Debian packages. If a component includes a / it must be double-escaped, e.g. distribution/my\\\/component/architecture for a my/component component.
+  - name: recursive
+    description: If false, do not upload any matches in sub-directories.
+  - name: dryRun
+    description: If true, nothing is uploaded.
+  - name: symlinks
+    description: If true, symlinks are uploaded.
+  - name: explode
+    description: If true and the uploaded Artifact is an archive, the archive is expanded.
+  - name: exclusions
+    description: Semi-colon separated patterns to exclude.
+  - name: includeDirs
+    description: If true, empty directories matching the criteria are uploaded.
+  - name: syncDeletes
+    description: A path under which to delete any existing files in Artifactory.
+   
