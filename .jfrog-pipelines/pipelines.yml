@@ -64,6 +64,7 @@ pipelines:
           onExecute:
             # Run task
             - task: $TASK_REPOSITORY/$TASK_NAME@v$TASK_VERSION
+              rtIntegration: {{ .Values.artIntegration }}
               input:
                 inputResource: "upload_artifact_gitrepo_1"
                 sourcePath: .*
