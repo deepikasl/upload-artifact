@@ -229,7 +229,7 @@ func (g *UploadArtifact) run() error {
     parameters = parameters + "--sync-deletes" + g.inputs.syncDeletes + " "
   }
 
-  var uploadCommand = " "
+  var uploadCommand = ""
   uploadCommand = uploadCommand + "\"" + g.inputs.sourcePath + "\"" + " "
   uploadCommand = uploadCommand + "\"" + g.inputs.targetPath + "\"" + " "
   uploadCommand = uploadCommand + parameters
