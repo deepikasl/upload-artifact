@@ -147,7 +147,8 @@ func (g *UploadArtifact) handleExecution(name string, options ...string) (string
 }
 
 func (g *UploadArtifact) run() error {
-  stepTempDir := os.Getenv("step_tmp_dir")
+  stepTempDir := []string{"step_tmp_dir"}
+  stepTempDir = os.Getenv("step_tmp_dir")
   var uploadArtifactPath = append(stepTempDir, "/ArtifactUpload")
 	_, err := g.handleExecution("mkdir", "-p", uploadArtifactPath)
 	if err != nil {
@@ -262,11 +263,11 @@ func (g *UploadArtifact) run() error {
     }
   }
 
-	err = tasks.AddCacheFiles("output", []string{g.inputs.outputLocation})
-	if err != nil {
-		haltExecution("Failed to cache outputFileLocation " + g.inputs.outputLocation)
-		return err
-	}
+	// err = tasks.AddCacheFiles("output", []string{g.inputs.outputLocation})
+	// if err != nil {
+	// 	haltExecution("Failed to cache outputFileLocation " + g.inputs.outputLocation)
+	// 	return err
+	// }
 
 	err = g.addStepVariables()
 	if err != nil {
