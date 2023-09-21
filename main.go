@@ -254,8 +254,7 @@ func (g *UploadArtifact) run() error {
       g.inputs.failOnScan = "true"
     }
     var scanCommand = ""
-    scanCommand = scanCommand + "--insecure-tls=" + os.Getenv("no_verify_ssl") + " "
-    scanCommand = scanCommand + "--fail=", g.inputs.failOnScan + " "
+    scanCommand = scanCommand + "--insecure-tls=" + os.Getenv("no_verify_ssl") + " " + "--fail=" + g.inputs.failOnScan + " "
     _, err = g.handleExecution("jf", "rt", "build-scan", scanCommand, g.runVariables[stepName+"_buildName"], g.runVariables[stepName+"_buildNumber"])
     if err != nil {
       return err
