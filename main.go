@@ -229,15 +229,16 @@ func (g *UploadArtifact) run() error {
     parameters = parameters + "--sync-deletes" + g.inputs.syncDeletes + " "
   }
 
-  var uploadCommand = ""
-  uploadCommand = uploadCommand + g.inputs.sourcePath + " "
-  uploadCommand = uploadCommand + g.inputs.targetPath + " "
+  var uploadCommand = " "
+  uploadCommand = uploadCommand + "\"" + g.inputs.sourcePath + "\"" + " "
+  uploadCommand = uploadCommand + "\"" + g.inputs.targetPath + "\"" + " "
   uploadCommand = uploadCommand + parameters
   uploadCommand = uploadCommand + "--insecure-tls=" + os.Getenv("no_verify_ssl") + " "
   uploadCommand = uploadCommand + "--fail-no-op=true" + " "
   uploadCommand = uploadCommand + "--detailed-summary=true"
 
-  _, err = g.handleExecution("jf", "rt", "upload", uploadCommand)
+  // _, err = g.handleExecution("jf", "rt", "upload", uploadCommand)
+  _, err = g.handleExecution("jf", "rt", "upload", "\"" + g.inputs.sourcePath + "\"", "\"" + g.inputs.targetPath + "\"", parameters, "--insecure-tls=" + os.Getenv("no_verify_ssl"), "--fail-no-op=true", "--detailed-summary=true")
 	if err != nil {
 		return err
 	}
