@@ -79,6 +79,7 @@ pipelines:
             - name: {{ .Values.gitIntegration }}
         execution:
           onExecute:
+            - curl -fL https://install-cli.jfrog.io | sh
             # Run task
             - task: jfrog/$TASK_NAME@v$TASK_VERSION
               rtIntegration: {{ .Values.artIntegration }}
