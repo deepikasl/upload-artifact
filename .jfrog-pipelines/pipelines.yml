@@ -43,7 +43,7 @@ pipelines:
         execution:
           onExecute:
             - pushd $res_upload_artifact_gitrepo_1_resourcePath
-            - export GOPROXY="https://${int_{{ .Values.artIntegration }}_user}:${int_{{ .Values.artIntegration }}_apikey}@entplus.jfrog.io/artifactory/api/go/pipe-go-tasks-virtual"
+            - export GOPROXY="https://${int_deepikaArtEnt_user}:${int_deepikaArtEnt_apikey}@entplus.jfrog.io/artifactory/api/go/pipe-go-tasks-virtual"
             - export GONOSUMDB="github.com/jfrog/*"
             - go get .
             - make test
