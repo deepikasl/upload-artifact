@@ -239,8 +239,6 @@ func (g *UploadArtifact) run() error {
   uploadCommand = append(uploadCommand, "--fail-no-op=true")
   uploadCommand = append(uploadCommand, "--detailed-summary=true")
 
-  execute_command "jfrog rt upload  --fail-no-op=true --detailed-summary=true"
-
   _, err := g.handleExecution("jf", "rt", "upload", uploadCommand...)
 	if err != nil {
 		return err
