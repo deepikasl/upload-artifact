@@ -169,7 +169,7 @@ func (g *UploadArtifact) run() error {
     }
   }
   if len(g.inputs.targetPath) == 0 {
-    haltExecution("Failed to create path for outputLocation" + g.inputs.outputLocation)
+    haltExecution("Failed to create path for targetPath" + g.inputs.targetPath)
   }
   var parameters=""
 
@@ -182,12 +182,12 @@ func (g *UploadArtifact) run() error {
     uploadProperties= g.inputs.properties
     uploadProperties = append(uploadProperties, ";")
   }
-  uploadProperties = append(uploadProperties, "pipelines_step_name=", os.Getenv(step_name), ";")
-  uploadProperties = append(uploadProperties, "pipelines_run_number=", os.Getenv(run_number), ";")
-  uploadProperties = append(uploadProperties, "pipelines_step_id=", os.Getenv(step_id), ";")
-  uploadProperties = append(uploadProperties, "pipelines_pipeline_name=", os.Getenv(pipeline_name), ";")
-  uploadProperties = append(uploadProperties, "pipelines_step_type=", os.Getenv(step_type), ";")
-  uploadProperties = append(uploadProperties, "pipelines_step_platform=", os.Getenv(step_platform), ";")
+  uploadProperties = append(uploadProperties, "pipelines_step_name=", os.Getenv("step_name"), ";")
+  uploadProperties = append(uploadProperties, "pipelines_run_number=", os.Getenv("run_number"), ";")
+  uploadProperties = append(uploadProperties, "pipelines_step_id=", os.Getenv("step_id"), ";")
+  uploadProperties = append(uploadProperties, "pipelines_pipeline_name=", os.Getenv("pipeline_name"), ";")
+  uploadProperties = append(uploadProperties, "pipelines_step_type=", os.Getenv("step_type"), ";")
+  uploadProperties = append(uploadProperties, "pipelines_step_platform=", os.Getenv("step_platform"), ";")
 
   parameters = append(parameters, "--props='", uploadProperties, "'")
 
@@ -235,7 +235,7 @@ func (g *UploadArtifact) run() error {
   uploadCommand = append(uploadCommand, "\"", g.inputs.sourcePath, "\"")
   uploadCommand = append(uploadCommand, "\"", g.inputs.targetPath, "\"")
   uploadCommand = append(uploadCommand, parameters)
-  uploadCommand = append(uploadCommand, "--insecure-tls=", os.Getenv(no_verify_ssl))
+  uploadCommand = append(uploadCommand, "--insecure-tls=", os.Getenv("no_verify_ssl"))
   uploadCommand = append(uploadCommand, "--fail-no-op=true")
   uploadCommand = append(uploadCommand, "--detailed-summary=true")
 
@@ -254,7 +254,7 @@ func (g *UploadArtifact) run() error {
       g.inputs.failOnScan = "true"
     }
     scanCommand = ""
-    scanCommand = append(scanCommand, "--insecure-tls=", os.Getenv(no_verify_ssl))
+    scanCommand = append(scanCommand, "--insecure-tls=", os.Getenv("no_verify_ssl"))
     scanCommand = append(scanCommand, "--fail=", g.inputs.failOnScan)
     _, err = g.handleExecution("jf", "rt", "build-scan", scanCommand, g.runVariables[stepName+"_buildName"], g.runVariables[stepName+"_buildNumber"])
     if err != nil {
