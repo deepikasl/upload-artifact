@@ -43,7 +43,7 @@ pipelines:
         execution:
           onExecute:
             - pushd $res_upload_artifact_gitrepo_1_resourcePath
-            - echo "${int_deepikaArtEnt_use}r"
+            - echo "${int_deepikaArtEnt_user}"
             - export GOPROXY="https://${int_deepikaArtEnt_user}:${int_deepikaArtEnt_apikey}@entplus.jfrog.io/artifactory/api/go/pipe-go-tasks-virtual"
             - export GONOSUMDB="github.com/jfrog/*"
             - go get .
