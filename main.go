@@ -175,13 +175,12 @@ func (g *UploadArtifact) run() error {
   var parameters=""
 
   if len(g.inputs.module) > 0 {
-    parameters = append(parameters, "--module", g.inputs.module)
+    parameters = "--module" + g.inputs.module
   }
 
   var uploadProperties=""
   if len(g.inputs.properties) > 0 {
-    uploadProperties= g.inputs.properties
-    uploadProperties = append(uploadProperties, ";")
+    uploadProperties = g.inputs.properties + ";"
   }
   uploadProperties = append(uploadProperties, "pipelines_step_name=", os.Getenv("step_name"), ";")
   uploadProperties = append(uploadProperties, "pipelines_run_number=", os.Getenv("run_number"), ";")
