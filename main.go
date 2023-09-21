@@ -124,7 +124,7 @@ func (m *UploadArtifact) setResource() {
 func (g *UploadArtifact) handleExecution(name string, options ...string) (string, error) {
 	var output []byte
 	var err error
-	cmdExecLocation := g.resource.ResourcePath + g.inputs.executionLocation
+	cmdExecLocation := g.resource.ResourcePath
 	// simulating retry_command functionality here
 	cmd := execute(name, options...)
 	cmd.Dir = cmdExecLocation
@@ -147,7 +147,7 @@ func (g *UploadArtifact) handleExecution(name string, options ...string) (string
 }
 
 func (g *UploadArtifact) run() error {
-  stepTmpDir := os.Getenv("step_tmp_dir")
+  stepTmpDir = os.Getenv("step_tmp_dir")
   var uploadArtifactPath = append(stepTmpDir, "/ArtifactUpload")
 	_, err := g.handleExecution("mkdir", "-p", uploadArtifactPath)
 	if err != nil {
