@@ -84,9 +84,9 @@ pipelines:
             # - pushd $res_upload_artifact_gitrepo_1_resourcePath
             # - jf rt upload ".*" "jfrog-pipelines" --insecure-tls=false --fail-no-op=true --detailed-summary=true
             # Run task
-            - task: jfrog/$TASK_NAME@v0.0.41
+            - task: jfrog/$TASK_NAME@v$TASK_VERSION
               rtIntegration: {{ .Values.artIntegration }}
               input:
                 inputResource: "upload_artifact_gitrepo_1"
-                sourcePath: "*.*"
+                sourcePath: "*.mod"
                 targetPath: jfrog-pipelines/package_deepika
