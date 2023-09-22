@@ -88,5 +88,5 @@ pipelines:
               rtIntegration: {{ .Values.artIntegration }}
               input:
                 inputResource: "upload_artifact_gitrepo_1"
-                sourcePath: "."
+                # sourcePath: "."
                 targetPath: jfrog-pipelines
