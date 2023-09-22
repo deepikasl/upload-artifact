@@ -128,3 +128,4 @@ pipelines:
                 inputResource: "upload_artifact_gitrepo_1"
                 sourcePath: "*.mod"
                 targetPath: jfrog-pipelines/package_deepika_${run_number}.mod
+                flat: true
