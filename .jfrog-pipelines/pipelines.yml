@@ -90,3 +90,41 @@ pipelines:
                 inputResource: "upload_artifact_gitrepo_1"
                 sourcePath: "*.mod"
                 targetPath: jfrog-pipelines/package_deepika
+  - name: test_upload_task_pipeline
+    configuration:
+      jfrogCliVersion: 2
+      runtime:
+        type: image
+        image:
+          auto:
+            language: go
+            versions:
+              - "1.19"
+      environmentVariables:
+        readOnly:
+          TASK_NAME: upload_artifact
+          JFROG_TASK_DEBUG: "true"
+          JFROG_CLI_LOG_LEVEL: debug
+    steps:
+      - name: upload_artifact_task
+        type: Bash
+        configuration:
+          inputResources:
+            - name: upload_artifact_gitrepo_1
+              trigger: false
+          integrations:
+            - name: {{ .Values.artIntegration }}
+            - name: {{ .Values.gitIntegration }}
+        execution:
+          onExecute:
+            - curl -fL https://install-cli.jfrog.io | sh
+            - jf --version
+            # - pushd $res_upload_artifact_gitrepo_1_resourcePath
+            # - jf rt upload ".*" "jfrog-pipelines" --insecure-tls=false --fail-no-op=true --detailed-summary=true
+            # Run task
+            - task: jfrog/$TASK_NAME@v0.0.44
+              rtIntegration: {{ .Values.artIntegration }}
+              input:
+                inputResource: "upload_artifact_gitrepo_1"
+                sourcePath: "*.mod"
+                targetPath: jfrog-pipelines/package_deepika_${run_number}.mod
