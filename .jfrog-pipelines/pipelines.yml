@@ -84,7 +84,7 @@ pipelines:
             # - pushd $res_upload_artifact_gitrepo_1_resourcePath
             # - jf rt upload ".*" "jfrog-pipelines" --insecure-tls=false --fail-no-op=true --detailed-summary=true
             # Run task
-            - task: jfrog/$TASK_NAME@v$TASK_VERSION
+            - task: jfrog/$TASK_NAME@v0.0.37
               rtIntegration: {{ .Values.artIntegration }}
               input:
                 inputResource: "upload_artifact_gitrepo_1"
