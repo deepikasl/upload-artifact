@@ -242,7 +242,7 @@ func (g *UploadArtifact) run() error {
 	if err != nil {
 		return err
 	}
-  _, err = g.handleExecution("jf", "rt", "upload", g.inputs.sourcePath, "\"" + g.inputs.targetPath + "\"", "--insecure-tls=" + os.Getenv("no_verify_ssl"), "--fail-no-op=true", "--detailed-summary=true")
+  _, err = g.handleExecution("jf", "rt", "upload", "\"" + g.inputs.sourcePath + "\"", "\"" + g.inputs.targetPath + "\"", "--flat=true", "--insecure-tls=" + os.Getenv("no_verify_ssl"), "--fail-no-op=true", "--detailed-summary=true")
 	if err != nil {
 		return err
 	}
