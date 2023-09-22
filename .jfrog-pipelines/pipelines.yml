@@ -84,7 +84,7 @@ pipelines:
             # - pushd $res_upload_artifact_gitrepo_1_resourcePath
             # - jf rt upload ".*" "jfrog-pipelines" --target-props='pipelines_step_name=test_published_upload_artifact_task;pipelines_run_number=16;pipelines_step_id=598310;pipelines_pipeline_name=upload_artifact_publish;pipelines_step_type=Bash;pipelines_step_platform=Ubuntu_18.04;' --insecure-tls=false --fail-no-op=true --detailed-summary=true
             # Run task
-            - task: jfrog/$TASK_NAME@v$0.0.28
+            - task: jfrog/$TASK_NAME@v0.0.28
               rtIntegration: {{ .Values.artIntegration }}
               input:
                 inputResource: "upload_artifact_gitrepo_1"
